@@ -1,97 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hey Aastha ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      overflow: hidden;
-      text-align: center;
-    }
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
-      position: relative;
-    }
-    h1 { color: #ff4d6d; }
-    p { color: #444; margin-bottom: 25px; }
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
-    }
-    #yesBtn { background-color: #ff4d6d; color: white; }
-    #yesBtn:hover { transform: scale(1.1); }
-    #noBtn { background-color: #ccc; position: absolute; }
-    .hearts {
-      position: fixed;
-      font-size: 24px;
-      animation: float 4s linear infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-600px); opacity: 0; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hey Aastha ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 400px;
+    position: relative;
+  }
+
+  h1 { color: #ff4d6d; }
+  p { color: #444; margin-bottom: 25px; }
+
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+  }
+
+  #yesBtn { background-color: #ff4d6d; color: white; }
+  #yesBtn:hover { transform: scale(1.1); }
+
+  #noBtn {
+    background-color: #ccc;
+    position: absolute;
+  }
+
+  .hearts {
+    position: fixed;
+    font-size: 24px;
+    animation: float 4s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-600px); opacity: 0; }
+  }
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Hey Aastha ❤️</h1>
-    <p>Will you be my Valentine this year?</p>
-    <button id="yesBtn">YES 💖</button>
-    <button id="noBtn">No 🙈</button>
-  </div>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
+<!-- 💖 START SCREEN -->
+<div class="card">
+  <h1>Hey Aastha ❤️</h1>
+  <p>Will you be my Valentine this year?</p>
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">No 🙈</button>
+</div>
 
-    yesBtn.addEventListener("click", () => {
-      document.body.innerHTML = `
-        <h1 style="color:white; font-family:'Segoe UI', sans-serif; text-align:center; margin-top:40vh;">
-          YAYYY!! Best decision ever 💘✨<br>
-          YIPPIIIIEEEEEEEEE 🎉💖
-        </h1>
-        <iframe width="0" height="0"
-          src="https://www.youtube.com/embed/tD4HCZe-tew?autoplay=1"
-          frameborder="0" allow="autoplay">
-        </iframe>
-      `;
-      setInterval(createHeart, 200);
-    });
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
+  // 💘 Celebration screen (only YES triggers)
+  function startCelebration() {
+    document.body.innerHTML = `
+      <h1 style="color:white; font-family:'Segoe UI', sans-serif; text-align:center; margin-top:40vh;">
+        YAYYY!! Best decision ever 💘✨<br>
+        YIPPIIIIEEEEEEEEE 🎉💖
+      </h1>
+      <audio autoplay>
+        <source src="song.mp3" type="audio/mpeg">
+      </audio>
+    `;
+    setInterval(createHeart, 200);
+  }
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("hearts");
-      heart.innerText = "💖";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.top = "100%";
-      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }
-  </script>
+  // YES button
+  yesBtn.addEventListener("click", startCelebration);
+
+  // NO runs away on hover
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // NO click → hand drags it away (no celebration)
+  noBtn.addEventListener("click", () => {
+    const hand = document.createElement("div");
+    hand.style.position = "fixed";
+    hand.style.fontSize = "40px";
+    hand.style.transition = "all 0.6s ease-in-out";
+    hand.innerText = "✋";
+    document.body.appendChild(hand);
+
+    const rect = noBtn.getBoundingClientRect();
+    hand.style.left = rect.left - 40 + "px";
+    hand.style.top = rect.top - 20 + "px";
+
+    setTimeout(() => {
+      hand.style.left = window.innerWidth + "px";
+      noBtn.style.left = window.innerWidth + "px";
+    }, 100);
+  });
+
+  // Floating hearts
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("hearts");
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = "100%";
+    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+  }
+</script>
+
 </body>
 </html>
